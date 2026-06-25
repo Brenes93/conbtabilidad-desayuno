@@ -27,6 +27,22 @@ input[type="number"]::-webkit-inner-spin-button {
   appearance: none;
 }
 
+.product-summary {
+  list-style: none;
+}
+
+.product-summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .product-summary span[aria-hidden="true"] {
+  transform: rotate(45deg);
+}
+
+.product-summary span[aria-hidden="true"] {
+  transition: transform 0.18s ease;
+}
+
 .field-label {
   display: block;
   margin-bottom: 0.35rem;

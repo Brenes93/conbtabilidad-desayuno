@@ -147,7 +147,7 @@ export function DailyScreen({
         <ProductDailyCard key={line.product.id} line={line} onChange={updateLine} />
       ))}
 
-      <div className="sticky bottom-24 z-10">
+      <div>
         <button
           type="button"
           disabled={saving || hasErrors}
@@ -219,13 +219,21 @@ function ProductDailyCard({
   onChange: (productId: string, field: 'supplierEntry' | 'takenFromWarehouse' | 'finalLeftover', value: string) => void
 }) {
   return (
-    <article className="rounded-[1.75rem] bg-[#fffaf2] p-4 shadow-sm shadow-amber-950/5 ring-1 ring-amber-950/5">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-xl font-black tracking-tight text-stone-950">{line.product.name}</h3>
-        <div className="rounded-full bg-amber-100 px-3 py-1 text-sm font-black text-amber-950">
-          Stock {line.warehouseStockAfter}
+    <details className="rounded-[1.75rem] bg-[#fffaf2] p-4 shadow-sm shadow-amber-950/5 ring-1 ring-amber-950/5">
+      <summary className="product-summary flex cursor-pointer items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-black uppercase tracking-wide text-amber-800">Tipo de pan</p>
+          <h3 className="text-xl font-black tracking-tight text-stone-950">{line.product.name}</h3>
         </div>
-      </div>
+        <div className="flex items-center gap-2">
+          <div className="rounded-full bg-amber-100 px-3 py-1 text-sm font-black text-amber-950">
+            Stock {line.warehouseStockAfter}
+          </div>
+          <span className="text-xl font-black text-amber-950" aria-hidden="true">
+            +
+          </span>
+        </div>
+      </summary>
 
       <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
         <Metric label="Stock almacen" value={line.warehouseStockBefore} />
@@ -271,7 +279,7 @@ function ProductDailyCard({
       </div>
 
       {line.error && <p className="mt-3 rounded-2xl bg-red-100 p-3 text-sm font-bold text-red-800">{line.error}</p>}
-    </article>
+    </details>
   )
 }
 
